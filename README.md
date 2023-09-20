@@ -92,3 +92,6 @@ gem5/util/term/m5term localhost 3456
 
 ## Ubuntu
 
+```bash
+build/RISCV/gem5.opt ./riscv-linux.py
+```

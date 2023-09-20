@@ -46,26 +46,23 @@ board = RiscvBoard(
     cache_hierarchy=cache_hierarchy,
 )
 
-# Here we a full system workload: "riscv-ubuntu-20.04-boot" which boots
-# Ubuntu 20.04. Once the system successfully boots it encounters an `m5_exit`
-# instruction which stops the simulation. When the simulation has ended you may
-# inspect `m5out/system.pc.com_1.device` to see the stdout.
-
 #board.set_workload(CustomResource(local_path="/home/shc/projects/riscv-imgs/ubuntudene/ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img"))
 
 #board.set_kernel_disk_workload(kernel=CustomResource("/home/shc/projects/riscv-imgs/ubuntu/bootloader-vmlinux-5.10"), disk_image=CustomDiskImageResource("/home/shc/projects/riscv-imgs/ubuntudene/ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img"))
+
 
 board.set_workload(CustomWorkload(
     function = "set_kernel_disk_workload",
     parameters = {
         #"bootloader" : AbstractResource("/home/shc/projects/riscv-imgs/ubuntu/bootloader-vmlinux-5.10"),
-        "kernel" : CustomResource("/home/shc/projects/riscv-imgs/gem5cached/riscv-bootloader-vmlinux-5.10"),
-        "disk_image" : CustomDiskImageResource("/home/shc/projects/riscv-imgs/gem5cached/riscv-ubuntu-20.04-img")
+        "kernel" : CustomResource("/home/shc/.cache/gem5/riscv-bootloader-vmlinux-5.10"),
+        "disk_image" : CustomDiskImageResource("/home/shc/.cache/gem5/riscv-ubuntu-20.04-img", root_partition="1") ## metadata?
         #"disk_image" : DiskImageResource("/home/shc/projects/riscv-imgs/ubuntudene/ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img")
     }
 ))
 
-#board.set_workload(AbstractResource("/home/shc/projects/riscv-imgs/ubuntudene/ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img"))
+
+#board.set_workload(Workload("riscv-ubuntu-20.04-boot"))
 
 simulator = Simulator(board=board)
 simulator.run()

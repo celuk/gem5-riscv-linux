@@ -35,6 +35,57 @@ scons build/RISCV/gem5.opt -j$(nproc)
 
 ## UCanLinux
 
+### Required Downloads
+
+Download prebuilt ucanlinux riscv disk image from here:
+
+dist.gem5.org/dist/v22-1/images/riscv/busybox/riscv-disk.img.gz
+
+Download prebuilt bootloader from here:
+
+https://github.com/UCanLinux/riscv64-sample/blob/master/bbl
+
+or here:
+
+http://dist.gem5.org/dist/v22-1/kernels/riscv/static/bootloader-vmlinux-5.10
+
+Extract the riscv disk image `riscv-disk.img.gz`.
+
+### Booting
+In a terminal run disk image and the bootloader as an example:
+
+```bash
+gem5/build/RISCV/gem5.opt \
+gem5/configs/example/riscv/fs_linux.py \
+--caches --l1i_size=16kB --l1d_size=16kB \
+--l2cache --l2_size=256kB \
+--mem-type=DDR4_2400_8x8 \
+--mem-size=1GB \
+--cpu-type=TimingSimpleCPU \
+--kernel=riscv-imgs/ucanlinux/bbl \
+--disk-image=riscv-imgs/ucanlinux/riscv-disk.img
+```
+
+### Controlling
+After running via gem5, you can control and see the boot process by connecting to default port `3456`.
+
+Either you can connect via `telnet`:
+
+```bash
+telnet localhost 3456
+```
+
+or after building (one time) `m5term`, you can connect via it:
+
+```bash
+cd gem5/util/term
+make
+```
+
+```bash
+gem5/util/term/m5term localhost 3456
+```
+
 ## Fedora
 
 ### Required Downloads
@@ -46,6 +97,10 @@ https://fedorapeople.org/groups/risc-v/disk-images
 Download prebuilt bootloader from here:
 
 https://github.com/UCanLinux/riscv64-sample/blob/master/bbl
+
+or here:
+
+http://dist.gem5.org/dist/v22-1/kernels/riscv/static/bootloader-vmlinux-5.10
 
 Extract the riscv disk image `stage4-disk.img.xz`:
 

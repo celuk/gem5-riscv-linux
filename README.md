@@ -158,10 +158,10 @@ xz -d -v ubuntu-22.04.3-preinstalled-server-riscv64+unmatched.img.xz
 
 ### Booting
 
-To boot ubuntu, either you can use [riscv-linux.py](riscv-linux.py) python script by setting `kernel` and `disk_image` paths of the downloaded images:
+To boot ubuntu, either you can use [riscv_linux.py](riscv_linux.py) python script by setting `kernel` and `disk_image` paths of the downloaded images:
 
 ```bash
-build/RISCV/gem5.opt ./riscv-linux.py
+build/RISCV/gem5.opt ./riscv_linux.py
 ```
 
 or you can also use command line that does same thing exactly as script:
@@ -179,7 +179,7 @@ gem5/configs/example/riscv/fs_linux.py \
 --command-line="console=ttyS0 root=/dev/vda1 ro"
 ```
 
-In the above command the most important thing is `root=/dev/vda1` part in `command-line` flag and also `root_partition=1` parameter in [riscv-linux.py](riscv-linux.py). Default root partition is 0 and if you do not set this flag, either in the script or command line, ubuntu cannot boot like other os images.
+In the above command the most important thing is `root=/dev/vda1` part in `command-line` flag and also `root_partition=1` parameter in [riscv_linux.py](riscv_linux.py). Default root partition is 0 and if you do not set this flag, either in the script or command line, ubuntu cannot boot like other os images.
 
 For booting any os image you can determine the root partition via `fdisk -l <your-disk-image>` command. Here is an example:
 

@@ -202,7 +202,7 @@ Device      	Start 	End Sectors  Size Type
 Partition table entries are not in disk order.
 ```
 
-As you can see above, `Linux filesystem` (the one with biggest size) shows in device `ubuntu.img``1` and `1` indicates that `root_partition=``1` or in the other words `root` should be mounted at `dev/vda``1`. (It was `0` (`dev/vda`) for other os images I mentioned above.)
+As you can see above, `Linux filesystem` (the one with biggest size) shows in device `ubuntu.img` `1` and `1` indicates that `root_partition=` `1` or in the other words `root` should be mounted at `dev/vda` `1`. (It was `0` (`dev/vda`) for other os images I mentioned above.)
 
 ### Controlling
 
